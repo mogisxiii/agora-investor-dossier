@@ -109,10 +109,10 @@ const content = {
       ],
     },
     legal: {
-      index: "03",
-      kicker: "Khu hồ sơ pháp lý",
-      title: "Phòng hồ sơ pháp lý: biến nỗi sợ lớn nhất thành lý do mua mạnh nhất.",
-      desc: "Với đất nền, pháp lý không phải là một phần phụ. Pháp lý chính là sản phẩm. Khi nhà đầu tư thấy hồ sơ được tổ chức như một Khu hồ sơ pháp lý, cảm giác rủi ro giảm xuống và mức độ tin cậy tăng lên.",
+      index: "01",
+      kicker: "Pháp lý là điểm then chốt đầu tư",
+      title: "Trước khi xem vị trí hay giá bán, hãy kiểm tra bộ hồ sơ pháp lý của Agora City.",
+      desc: "Lợi thế lớn nhất của Agora City không chỉ nằm ở quy mô 127ha hay tiện ích nội khu, mà ở khả năng giúp nhà đầu tư kiểm chứng pháp lý ngay từ đầu: sổ riêng, quy hoạch, nghĩa vụ tài chính, cấp phép xây dựng, điều kiện giao dịch và hồ sơ chủ đầu tư.",
       useLabel: "Nhà đầu tư dùng để:",
       request: "Yêu cầu xem hồ sơ",
       items: [
@@ -323,7 +323,7 @@ const content = {
       ["48+", "Internal amenities", "A foundation for living, business operation and cash-flow exploitation."],
     ],
     intro: {
-      index: "01",
+      index: "02",
       kicker: "Market Problem",
       title: "Land investors do not lack projects to view. They lack an asset clear enough to commit capital.",
       p1: "Many real estate landing pages only try to prove that a project looks beautiful. Serious investors do not decide based on renderings. They decide when legal risks are clarified, documents are organized and the investment thesis is strong enough.",
@@ -338,7 +338,7 @@ const content = {
       ],
     },
     checklist: {
-      index: "02",
+      index: "03",
       kicker: "Investor Checklist",
       title: "7 questions investors must answer before buying land in Agora City.",
       desc: "This is the most important section of the page. Instead of pushing visitors to leave their phone number immediately, the website must help them review the biggest risks first. Once the answers are clear, consultation demand becomes more natural.",
@@ -395,9 +395,9 @@ const content = {
     },
     legal: {
       index: "03",
-      kicker: "Legal Data Room",
-      title: "Legal dossier room: turning the biggest fear into the strongest reason to buy.",
-      desc: "For land investment, legal status is not a side topic. It is the product itself. When investors see documents organized like a Legal Data Room, perceived risk decreases and trust increases.",
+      kicker: "Legal First",
+      title: "Before reviewing location or price, review Agora City’s legal dossier.",
+      desc: "Agora City’s strongest advantage is not only its 127ha scale or internal amenities, but the ability to let investors verify legal documents from the beginning: individual titles, planning, financial obligations, construction permits, transaction conditions and developer profile.",
       useLabel: "Investor use:",
       request: "Request documents",
       items: [
@@ -680,9 +680,9 @@ const content = {
     },
     legal: {
       index: "03",
-      kicker: "法律资料室",
-      title: "法律资料室：把最大的恐惧转化为最强的购买理由。",
-      desc: "对于土地投资，法律状态不是附属内容，而是产品本身。当投资者看到资料像法律资料室一样被组织起来，风险感会降低，信任度会提高。",
+      kicker: "法律优先",
+      title: "在看位置或价格之前，先查看 Agora City 的法律资料。",
+      desc: "Agora City 最大的优势不只是 127 公顷规模或内部配套，而是让投资者从一开始就能核查法律文件：独立土地证、规划、财务义务、建设许可、交易条件和开发商资料。",
       useLabel: "投资者用于：",
       request: "申请查看资料",
       items: [
@@ -969,6 +969,47 @@ function App() {
         ))}
       </section>
 
+      <section className="section legal-section" id="legal">
+        <SectionLabel index={t.legal.index} kicker={t.legal.kicker} />
+
+        <div className="section-heading">
+          <h2>{t.legal.title}</h2>
+          <p>{t.legal.desc}</p>
+        </div>
+
+        <div className="data-room-grid" id="dataroom">
+          {t.legal.items.map((item) => (
+            <article className="data-room-card" key={item.code}>
+              <div className="document-image">
+                <img src={item.img} alt={item.title} />
+              </div>
+
+              <div className="document-content">
+                <span>{item.code}</span>
+                <h3>{item.title}</h3>
+                <p>{item.summary}</p>
+
+                <ul>
+                  {item.documents.map((doc) => (
+                    <li key={doc}>{doc}</li>
+                  ))}
+                </ul>
+
+                <div className="investor-use">
+                  <b>{t.legal.useLabel}</b>
+                  <p>{item.investorUse}</p>
+                </div>
+
+                <a href="#contact" className="mini-link">
+                  {t.legal.request}
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+
       <section className="section intro-section">
         <SectionLabel index={t.intro.index} kicker={t.intro.kicker} />
         <div className="intro-grid">
@@ -1024,45 +1065,7 @@ function App() {
         </div>
       </section>
 
-      <section className="section legal-section" id="legal">
-        <SectionLabel index={t.legal.index} kicker={t.legal.kicker} />
-
-        <div className="section-heading">
-          <h2>{t.legal.title}</h2>
-          <p>{t.legal.desc}</p>
-        </div>
-
-        <div className="data-room-grid" id="dataroom">
-          {t.legal.items.map((item) => (
-            <article className="data-room-card" key={item.code}>
-              <div className="document-image">
-                <img src={item.img} alt={item.title} />
-              </div>
-
-              <div className="document-content">
-                <span>{item.code}</span>
-                <h3>{item.title}</h3>
-                <p>{item.summary}</p>
-
-                <ul>
-                  {item.documents.map((doc) => (
-                    <li key={doc}>{doc}</li>
-                  ))}
-                </ul>
-
-                <div className="investor-use">
-                  <b>{t.legal.useLabel}</b>
-                  <p>{item.investorUse}</p>
-                </div>
-
-                <a href="#contact" className="mini-link">
-                  {t.legal.request}
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+      
 
       <section className="section thesis-section" id="thesis">
         <SectionLabel index={t.thesis.index} kicker={t.thesis.kicker} />
